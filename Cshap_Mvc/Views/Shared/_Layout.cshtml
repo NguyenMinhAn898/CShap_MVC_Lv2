@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="">
+    <!-- Hearder-->
+    @Html.Partial("_Hearder")
+    <div class="container-fluid body-content ">
+        <!--Content-->
+        <div class="row">  
+            <!-- Menu -->
+            <div class="col-2 col-md-2 ">
+                @Html.Partial("_Menu")
+            </div>
+            <!-- Content -->
+            <div class="col-10 col-md-10 ">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- Footer -->
+        @Html.Partial("_Footer")
+    </div>
+
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

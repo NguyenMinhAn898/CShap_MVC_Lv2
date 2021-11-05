@@ -23,7 +23,7 @@ namespace Cshap_Mvc.Services
                 Title = b.title,
                 Short_Description = b.short_description,
                 Description = b .description,
-                Category = "a",
+                Category = db.categories.Where(c=>c.id==b.id).FirstOrDefault().name,
                 Image_Url = b.img_url,
                 Place = b.place,
                 Public_Date = b.public_date != null ? b.public_date.Value : DateTime.Now

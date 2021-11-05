@@ -43,11 +43,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Category)
                 </td>
-                <td>
-                    @{
-
-                        Html.Display(item.Status ==true? "Yes" : "No");
-                      }
+                <td class="text-center">
+                    @(item.Status ? "Yes" : "No")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Place)

@@ -44,10 +44,10 @@
                     @Html.DisplayFor(modelItem => item.Category)
                 </td>
                 <td>
-                    @*@{
-                        Html.Display(item.Status ? "Yes" : "No");
-                      }*@
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @{
+
+                        Html.Display(item.Status ==true? "Yes" : "No");
+                      }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Place)

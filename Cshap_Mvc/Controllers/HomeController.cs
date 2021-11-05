@@ -1,4 +1,5 @@
 ﻿using Cshap_Mvc.Models;
+using Cshap_Mvc.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +10,15 @@ namespace Cshap_Mvc.Controllers
 {
     public class HomeController : Controller
     {
-        static List<BlogModel> listBlog = new List<BlogModel>();
-
         /// <summary>
         /// Get Index list blog
         /// </summary>
         /// <param name="blog"></param>
         /// <returns></returns>
-        public ActionResult Index(BlogModel blog)
+        public ActionResult Index()
         {
-
-            ViewBag.blog = blog;
-            return View(listBlog);
+            ViewBag.blog = new BlogModel();
+            return View(BlogService.findAll());
         }
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace Cshap_Mvc.Controllers
             {
 
             }
-            return View("Index", listBlog);
+            return View("Index", BlogService.findAll());
         }
 
         /// <summary>

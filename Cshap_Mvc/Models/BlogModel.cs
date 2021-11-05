@@ -43,7 +43,11 @@ namespace Cshap_Mvc.Models
         public DateTime Public_Date { get; set; }
 
         public bool Is_Active { get; set; }
+    }    
 
+    public class BlogDbContext : DbContext
+    {
+        public BlogDbContext() { }
+        public DbSet<BlogModel> Blog { get; set; }
     }
-    
 }

@@ -37,10 +37,26 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_blog_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="blog" Type="Self.blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blog">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Blog_ManagementModelStoreContainer">
           <EntitySet Name="blog" EntityType="Self.blog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_blog_category" Association="Self.FK_blog_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="blog" EntitySet="blog" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -61,6 +77,7 @@
           <Property Name="is_active" Type="Boolean" />
           <Property Name="category_id" Type="Int32" />
           <Property Name="public_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="category" Relationship="Self.FK_blog_category" FromRole="blog" ToRole="category" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -68,6 +85,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="blogs" Relationship="Self.FK_blog_category" FromRole="category" ToRole="blog" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -79,10 +97,26 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_blog_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="blog" Type="Self.blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blog">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Blog_ManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="blogs" EntityType="Self.blog" />
           <EntitySet Name="categories" EntityType="Self.category" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_blog_category" Association="Self.FK_blog_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="blog" EntitySet="blogs" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>

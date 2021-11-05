@@ -28,6 +28,9 @@ namespace Cshap_Mvc.Models
         [Display(Name = "Loại")]
         public String Category { get; set; }
 
+        [Display(Name = "Hình ảnh")]
+        public String Image_Url { get; set; }
+
         [Required(ErrorMessage = "Please enter status")]
         [Display(Name = "Trạng thái")]
         public bool Status { get; set; }

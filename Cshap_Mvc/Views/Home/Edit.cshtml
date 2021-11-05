@@ -15,60 +15,86 @@
 
                 <div class="form-horizontal">
                     <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-12 mt-2">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2 m-1" })
+                        <div class="col-md-12">
                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Short_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Short_Description, htmlAttributes: new { @class = "control-label col-md-2 m-1" })
                         <div class="col-md-12">
-                            @Html.EditorFor(model => model.Short_Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.TextAreaFor(model => model.Short_Description, new { @class = "form-control", rows = "3" })
                             @Html.ValidationMessageFor(model => model.Short_Description, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2 m-1" })
                         <div class="col-md-12">
-                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" , rows = "6" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "6" })
                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-12">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Status)
-                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Image_Url, htmlAttributes: new { @class = "control-label col-md-2 m-1" })
+                        <div class="col-md-10">
+                            <input class="form-control w-50" name="ImageUrl" id="inputEditFile" type="file">
+                        </div>
+                    </div>
+
+                    <div class="form-group py-2 ">
+                        @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
+                        <div class="row mx-2">
+                            <div class="form-check col-md-2">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check col-md-2">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Checked checkbox
+                                </label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-12">
-                            @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                    <div class="form-group py-2 ">
+                        @Html.Label("Status","Public", htmlAttributes: new { @class = "control-label col-md-2 m-1" })
+                        <div class="col-md-12 row mx-2">
+                            <div class="form-check col-md-1">
+                                @Html.RadioButtonFor(model => model.Status,true,new { @class = "form-check-input"})
+                                @Html.Label("Public_Date", "Yes")
+                            </div>
+                            <div class="form-check col-md-1">
+                                @Html.RadioButtonFor(model => model.Status, false,  new { @class = "form-check-input" })
+                                @Html.Label("Public_Date", "No")
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
-                    <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Public_Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-12">
-                            @Html.EditorFor(model => model.Public_Date, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Public_Date, "", new { @class = "text-danger" })
+                    <div class="form-group py-2 row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
+                            <div class="col-md-12 ">
+                                @*@Html.DropDownList("Category", new SelectList(Model.listCategory, "Id", "Name", Model.Blog.Category_Id), new { @class = "form-control-novalidate with-30" })*@
+                                <select class="form-select" id="StudentGender" name="StudentGender">
+                                    <option>Select Gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group py-2">
-                        @Html.LabelFor(model => model.Is_Active, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-12">
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Is_Active)
-                                @Html.ValidationMessageFor(model => model.Is_Active, "", new { @class = "text-danger" })
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Public_Date, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Public_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Public_Date, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -77,7 +103,7 @@
             </div>
             <div class="card-footer text-center" >
                     <button class="btn btn-success c" type="submit">Submit</button>
-                    <button class="btn btn-primary" type="button" onclick="blogClear()"> Clear</button>
+                    <button class="btn btn-primary" type="button" > Clear</button>
             </div>
         }
 

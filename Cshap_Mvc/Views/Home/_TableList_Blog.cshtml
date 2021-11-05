@@ -1,56 +1,72 @@
 ﻿@model IEnumerable<Cshap_Mvc.Models.BlogModel>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Place)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Public_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Is_Active)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Place)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Public_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Is_Active)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+<table class="table table-bordered">
+    <thead>
+        <tr class="col text-center">
+            <th class="" scope="col">
+                @Html.DisplayName("Id")
+            </th>
+            <th class="col-md-3" scope="col">
+                @Html.DisplayNameFor(model => model.Title)
+            </th >
+            <th class="col-md-1" scope="col">
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th class="col-md-1" scope="col">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th class="col-md-3" scope="col">
+                @Html.DisplayNameFor(model => model.Place)
+            </th>
+            <th class="col-md-2" scope="col">
+                @Html.DisplayNameFor(model => model.Public_Date)
+            </th>
+            <th class="col-md-1" scope="col">
+                @Html.DisplayName("Edit")
+            </th>
+            <th class="col-md-1" scope="col">
+                @Html.DisplayName("Delete")
+            </th>
         </tr>
-    }
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @*@{
+                        Html.Display(item.Status ? "Yes" : "No");
+                      }*@
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Place)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Public_Date)
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-outline-primary" type="button" >Edit</button>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-outline-danger" type="button" >Delete</button>
+                   
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
 
 </table>
 

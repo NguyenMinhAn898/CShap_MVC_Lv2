@@ -31,8 +31,8 @@
 /* Set style Menu*/
 .menu {
     background-color:white;
-    font-size:25px;
-    font-weight:400;
+    font-size:22px;
+    font-weight:350;
 }
 
 .menu a {
@@ -45,7 +45,7 @@
 }
 
 
-/* Set style content*/
+/* Set style content */
 .content {
     background-color: #E4E5E6;
 }
@@ -53,13 +53,25 @@
 .content .card {
     border-radius:10px;
 }
+
 .content .card-header{
     height:60px;
 }
 
+/* Set style footer */
 .footer {
-    background-color:grey;
-    color: black;
-    font-size:15px;
-    min-height:50px;
+    background-color: #494E53;
+    color:white;
+    min-height: 70px;
+}
+
+.footer p {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+}
+
+.footer a{
+    text-decoration:none;
+    font-size:20px;
 }

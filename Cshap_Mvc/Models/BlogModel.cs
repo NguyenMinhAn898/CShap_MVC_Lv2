@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -43,18 +44,6 @@ namespace Cshap_Mvc.Models
 
         public bool Is_Active { get; set; }
 
-        public BlogModel() { }
-        public BlogModel(int id , String title, string short_description , string description , string category, bool status, String place, DateTime public_date, bool is_active)
-        {
-            this.Id = id;
-            this.Title = title;
-            this.Category = category;
-            this.Short_Description = short_description;
-            this.Description = description;
-            this.Status = status;
-            this.Place = place;
-            this.Public_Date = public_date;
-            this.Is_Active = is_active;
-        }
     }
+    
 }

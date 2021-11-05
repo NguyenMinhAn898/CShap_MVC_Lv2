@@ -18,7 +18,6 @@ namespace Cshap_Mvc.Controllers
         /// <returns></returns>
         public ActionResult Index(BlogModel blog)
         {
-            initData();
 
             ViewBag.blog = blog;
             return View(listBlog);
@@ -46,8 +45,7 @@ namespace Cshap_Mvc.Controllers
         public ActionResult Edit(int id)
         {
             // Fetch data
-            BlogModel blog = new BlogModel(1, "Title abc", "Mô tả ngắn abc", "Chi tiết abc", "Thời sự", true, "Việt Nam, Kinh tế", DateTime.Now, true);
-            
+            BlogModel blog = new BlogModel();
             return View(blog);
         }
 
@@ -97,20 +95,6 @@ namespace Cshap_Mvc.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-        }
-
-        /// <summary>
-        /// Fetch data
-        /// </summary>
-        private void initData()
-        {
-            if (listBlog.Count == 0)
-            {
-                for (int i = 1; i < 11; i++)
-                {
-                    listBlog.Add(new BlogModel(i, "Hom nay la thu " + i, "Mô tả ngắn " + i, "Mô tả chi tiết " + i, "Giai tri " + i, true, "Ae " + i, DateTime.Now, true));
-                }
-            }
         }
 
     }

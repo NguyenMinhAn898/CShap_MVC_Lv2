@@ -23,6 +23,7 @@ namespace Cshap_Mvc.Services
                 Title = b.title,
                 Short_Description = b.short_description,
                 Description = b .description,
+                // cần sửa vì 2 bảng đã join 
                 Category = db.categories.Where(c=>c.id==b.id).FirstOrDefault().name,
                 Image_Url = b.img_url,
                 Place = b.place,

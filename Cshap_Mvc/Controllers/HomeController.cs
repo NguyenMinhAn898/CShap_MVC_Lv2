@@ -31,9 +31,10 @@ namespace Cshap_Mvc.Controllers
         {
             if (!String.IsNullOrEmpty(blog.Title))
             {
-
+                ViewBag.blog = blog;
+                return View("Index",BlogService.findAll());
             }
-            return View("Index", BlogService.findAll());
+            return RedirectToAction("Index");
         }
 
         /// <summary>

@@ -7,37 +7,15 @@
 
 <div class="content p-3">
     <div class="card-search">
-        <div class="card">
-            <div class="card-header">
-                <h2>Search Blogs</h2>
-            </div>
-            <div class="card-body row">
-                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "needs-validation row", novalidate = "" }))
-                {
-                    <div class="col-md-2">
-                        <label for="Title" class="col-form-label">Tiêu đề</label>
-                    </div>
-                    <div class="col-md-10 ">
-                        @Html.TextBox("Title", blog.Title, new { @class = "form-control", placeholder = "Tiêu đề" })
-                    </div>
-                    <div class="text-center mt-2 ">
-                        <button class="btn btn-outline-success" type="submit"> Search</button>
-                    </div>
-                }
-            </div>
-        </div>
+        @{
+            Html.RenderPartial("_FormSearch_Blog", blog);
+        }
     </div>
     <div class="list-blog mt-5">
-        <div class=" card">
-            <div class="card-header">
-                <h2> List Blog</h2>
-            </div>
-            <div class="card-body p-0">
-                @{ 
-                    Html.RenderPartial("_TableList_Blog", Model);
-                }
-            </div>
-        </div>
+        @{
+            Html.RenderPartial("_TableList_Blog", Model);
+        }
+       
     </div>
 
 </div>

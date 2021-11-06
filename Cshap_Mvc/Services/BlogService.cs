@@ -83,7 +83,8 @@ namespace Cshap_Mvc.Services
                                        Id = blog.id,
                                        Description = blog.description,
                                        Short_Description = blog.short_description,
-                                       Status = blog.status.HasValue ? blog.status.Value : false
+                                       Status = blog.status,
+                                       Category_Id = blog.category_id
                                    })).FirstOrDefault();
                 return ouput;
             }

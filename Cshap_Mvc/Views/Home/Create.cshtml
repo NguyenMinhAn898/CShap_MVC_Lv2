@@ -1,8 +1,10 @@
-﻿@model Cshap_Mvc.Models.BlogModel
+﻿@using Cshap_Mvc.Models
+@model Cshap_Mvc.Models.BlogModel
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var listCateogry = ViewBag.listCategory;
 }
 <div class="create-blog content p-3">
     <div class="card">
@@ -85,18 +87,14 @@
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                             <div class="col-md-12 ">
-                                @*@Html.DropDownList("Category", new SelectList(Model.listCategory, "Id", "Name", Model.Blog.Category_Id), new { @class = "form-control-novalidate with-30" })*@
-                                <select   class="form-select" id="StudentGender" name="StudentGender">
-                                    <option>Select Gender</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
+                                @Html.DropDownList("Category", new SelectList(listCateogry, "Id", "Name", Model.Category_Id), new { @class = "form-control-novalidate with-30" })
+                                
                             </div>
                         </div>
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Public_Date, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.Public_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                <input class="form-control" name="Public_Date" id="Public_Date" type="date" /> 
                                 @Html.ValidationMessageFor(model => model.Public_Date, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -104,9 +102,9 @@
                 </div>
 
             </div>
-            <div class="card-footer text-center" >
+            <div class="card-footer text-center p-3" >
                     <button class="btn btn-success c" type="submit">Submit</button>
-                    <button class="btn btn-primary" type="button" > Clear</button>
+                    <button class="btn btn-primary" type="button">Clear</button>
             </div>
         }
     </div>

@@ -6,11 +6,19 @@ using System.Web;
 
 namespace Cshap_Mvc.Services
 {
-    public class CategoryService
+    public class CategoryService : BaseService
     {
-        public List<CategoryModel> findAllCategory()
+        /// <summary>
+        /// Get all category
+        /// </summary>
+        /// <returns></returns>
+        public List<CategoryModel> findAll()
         {
-            List<CategoryModel> list = new List<CategoryModel>();
+            List<CategoryModel> list = cnn.categories.Select(cate => new CategoryModel
+            {
+                Id = cate.id,
+                Name = cate.name
+            }).ToList();
             return list;
         }
     }

@@ -9,22 +9,22 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="short_description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="img_url" Type="nvarchar" MaxLength="250" />
-          <Property Name="status" Type="bit" />
+          <Property Name="status" Type="bit" Nullable="false" />
           <Property Name="place" Type="nvarchar" MaxLength="250" />
-          <Property Name="is_active" Type="bit" />
-          <Property Name="category_id" Type="int" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
           <Property Name="public_date" Type="date" />
         </EntityType>
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -38,7 +38,7 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_blog_category">
-          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="1" />
           <End Role="blog" Type="Self.blog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="category">
@@ -67,15 +67,15 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="short_description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="img_url" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Boolean" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
           <Property Name="place" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="is_active" Type="Boolean" />
-          <Property Name="category_id" Type="Int32" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
           <Property Name="public_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="category" Relationship="Self.FK_blog_category" FromRole="blog" ToRole="category" />
         </EntityType>
@@ -83,7 +83,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="blogs" Relationship="Self.FK_blog_category" FromRole="category" ToRole="blog" />
         </EntityType>
@@ -98,7 +98,7 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_blog_category">
-          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="1" />
           <End Role="blog" Type="Self.blog" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="category">

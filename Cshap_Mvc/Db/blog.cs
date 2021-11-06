@@ -19,10 +19,10 @@ namespace Cshap_Mvc.Db
         public string short_description { get; set; }
         public string description { get; set; }
         public string img_url { get; set; }
-        public Nullable<bool> status { get; set; }
+        public bool status { get; set; }
         public string place { get; set; }
-        public Nullable<bool> is_active { get; set; }
-        public Nullable<int> category_id { get; set; }
+        public bool is_active { get; set; }
+        public int category_id { get; set; }
         public Nullable<System.DateTime> public_date { get; set; }
     
         public virtual category category { get; set; }

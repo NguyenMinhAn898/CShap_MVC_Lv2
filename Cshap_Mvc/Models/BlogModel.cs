@@ -29,6 +29,8 @@ namespace Cshap_Mvc.Models
         [Display(Name = "Loại")]
         public String Category { get; set; }
 
+        public int Category_Id { get; set; }
+
         [Display(Name = "Hình ảnh")]
         public String Image_Url { get; set; }
 

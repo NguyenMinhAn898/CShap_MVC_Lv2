@@ -14,6 +14,8 @@ namespace Cshap_Mvc.Controllers
     public class HomeController : Controller
     {
         private BlogService blogService = new BlogService();
+        private CategoryService categoryService = new CategoryService();
+
         /// <summary>
         /// Get Index list blog
         /// </summary>
@@ -33,6 +35,7 @@ namespace Cshap_Mvc.Controllers
         [HttpPost]
         public ActionResult SearchByTitle(BlogModel blog)
         {
+            // check string search
             if (!String.IsNullOrEmpty(blog.Title))
             {
                 ViewBag.blog = blog;
@@ -47,11 +50,10 @@ namespace Cshap_Mvc.Controllers
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
         {
-            if (id == 0)
+            if(id == 0)
                 return RedirectToAction("Index");
-            // Fetch data
-            BlogModel blog = blogService.findById(id);
-            return View(blog);
+
+            return View(blogService.findById(id));
         }
 
         /// <summary>
@@ -80,7 +82,7 @@ namespace Cshap_Mvc.Controllers
         {
             // clear mesage validate in fist load page
             ModelState.Clear();
-
+            ViewBag.listCategory = categoryService.findAll();
             return View();
         }
 

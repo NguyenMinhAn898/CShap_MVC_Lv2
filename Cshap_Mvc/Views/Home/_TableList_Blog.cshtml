@@ -5,9 +5,9 @@
         <h2> List Blog</h2>
     </div>
     <div class="card-body p-0">
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
-                <tr class="col text-center">
+                <tr class="col ">
                     <th class="" scope="col">
                         @Html.DisplayName("Id")
                     </th>
@@ -33,7 +33,6 @@
                         @Html.DisplayName("Delete")
                     </th>
                 </tr>
-
             </thead>
             <tbody>
                 @foreach (var item in Model)
@@ -57,21 +56,16 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Public_Date)
                         </td>
-                        <td class="text-center">
-                            <button class="btn btn-outline-primary" type="button">Edit</button>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Home", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
                         </td>
-                        <td class="text-center">
-                            <button class="btn btn-outline-danger" type="button">Delete</button>
-
+                        <td>
+                            <button class="btn btn-outline-danger" type="button" onclick='deleteBlog(@item.Id)'>Delete</button>
                         </td>
                     </tr>
-                }
-
+                 }
             </tbody>
-
-
         </table>
-
     </div>
 </div>
 

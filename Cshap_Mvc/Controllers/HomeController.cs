@@ -1,4 +1,7 @@
-﻿using Cshap_Mvc.Models;
+﻿using AutoMapper;
+using Cshap_Mvc.Db;
+using Cshap_Mvc.Mapper;
+using Cshap_Mvc.Models;
 using Cshap_Mvc.Services;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,7 @@ namespace Cshap_Mvc.Controllers
 {
     public class HomeController : Controller
     {
+        private BlogService blogService = new BlogService();
         /// <summary>
         /// Get Index list blog
         /// </summary>
@@ -18,7 +22,7 @@ namespace Cshap_Mvc.Controllers
         public ActionResult Index()
         {
             ViewBag.blog = new BlogModel();
-            return View(BlogService.findAll());
+            return View(blogService.findAll());
         }
 
         /// <summary>
@@ -32,7 +36,7 @@ namespace Cshap_Mvc.Controllers
             if (!String.IsNullOrEmpty(blog.Title))
             {
                 ViewBag.blog = blog;
-                return View("Index",BlogService.findAll());
+                return View("Index", blogService.findByTitle(blog.Title));
             }
             return RedirectToAction("Index");
         }
@@ -41,10 +45,12 @@ namespace Cshap_Mvc.Controllers
         /// Get view edit blog
         /// </summary>
         /// <returns></returns>
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id = 0)
         {
+            if (id == 0)
+                return RedirectToAction("Index");
             // Fetch data
-            BlogModel blog = new BlogModel();
+            BlogModel blog = blogService.findById(id);
             return View(blog);
         }
 
@@ -58,10 +64,10 @@ namespace Cshap_Mvc.Controllers
         {
             //checking model state
             if (ModelState.IsValid)
-            { 
+            {
                 //update blog to db
-
-                return RedirectToAction("Index");
+                if (blogService.updateBlog(blog))
+                    return RedirectToAction("Index");
             }
             return View(blog);
         }
@@ -90,11 +96,10 @@ namespace Cshap_Mvc.Controllers
             if (ModelState.IsValid)
             {
                 //update blog to db
-
-                return RedirectToAction("Index");
+                if (blogService.createBlog(blog))
+                    return RedirectToAction("Index");
             }
             return View();
         }
-
     }
 }

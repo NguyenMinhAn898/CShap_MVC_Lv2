@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Cshap_Mvc.Services
 {
-    public class CategoryService:BaseService
+    public class CategoryService
     {
         public List<CategoryModel> findAllCategory()
         {

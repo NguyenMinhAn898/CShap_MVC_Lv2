@@ -40,7 +40,7 @@ namespace Cshap_Mvc.Models
         public String Place { get; set; }
 
         [Display(Name = "Ngày public")]
-        public DateTime Public_Date { get; set; }
+        public DateTime? Public_Date { get; set; }
 
         public bool Is_Active { get; set; }
     }    

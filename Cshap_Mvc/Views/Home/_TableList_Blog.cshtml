@@ -48,13 +48,13 @@
                             @Html.DisplayFor(modelItem => item.Category)
                         </td>
                         <td class="text-center">
-                            @(item.Status ? "Yes" : "No")
+                            @(item.Status ? "Yes":"No")
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Place)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Public_Date)
+                            @Html.Display( "Public_Date", item.Public_Date.HasValue ? Convert.ToDateTime(item.Public_Date.Value).ToString("MM/dd/yyyy") : "")
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", "Home", new { id = item.Id }, new { @class = "btn btn-outline-primary" })

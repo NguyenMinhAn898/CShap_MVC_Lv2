@@ -36,6 +36,7 @@ namespace Cshap_Mvc.Services
                         Category = cnn.categories.Where(c => c.id == b.id).FirstOrDefault().name,
                         Image_Url = b.img_url,
                         Place = b.place,
+                        Status = b.status,
                         Public_Date = b.public_date
                     }).ToList();
                 return list;
@@ -63,6 +64,7 @@ namespace Cshap_Mvc.Services
                         Short_Description = blog.short_description,
                         Description = blog.description,
                         Place = blog.place,
+                        Status = blog.status,
                         Public_Date = blog.public_date
                     }).ToList();
 

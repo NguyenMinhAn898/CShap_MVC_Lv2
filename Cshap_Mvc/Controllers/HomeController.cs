@@ -51,7 +51,7 @@ namespace Cshap_Mvc.Controllers
         /// <returns></returns>
         public ActionResult Edit(int id = 0)
         {
-            if(id == 0)
+            if (id == 0)
                 return RedirectToAction("Index");
 
             ViewBag.listPlace = listPlace();
@@ -68,6 +68,7 @@ namespace Cshap_Mvc.Controllers
         [HttpPost]
         public ActionResult Edit(BlogModel blog)
         {
+            // Lỗi, chưa lấy được giá trị của địa chỉ => cháu nghĩ cần sử lý js để lấy trước khi sumit sẽ phải gộp lại các giá trị của place
             //checking model state
             if (ModelState.IsValid)
             {
@@ -122,12 +123,12 @@ namespace Cshap_Mvc.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Delete(int Id)
+        public ActionResult Delete(int Id = 0)
         {
-            BlogModel blog = new BlogModel();
-            blog.Id = Id;
+            if (Id <= 0)
+                return Json(data: false);
 
-            return blogService.deleteBlog(blog) ? Json(data: true) : Json(data: false); ;
+            return blogService.deleteBlog(new BlogModel(Id)) ? Json(data: true) : Json(data: false); ;
         }
 
         /// <summary>

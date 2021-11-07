@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var listPlace = ViewBag.listPlace;
+    List<Cshap_Mvc.Models.PlaceModel> listPlace = ViewBag.listPlace;
 }
 <div class="create-blog content p-3">
     <div class="card">
@@ -44,18 +44,19 @@
                     <div class="form-group py-2 ">
                         @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                         <div class="row mx-2">
-                            @{
-                                foreach (var place in listPlace)
+                            @{ foreach (var place in listPlace)
                                 {
                                     <div class="form-check col-md-2">
-                                        @Html.CheckBox("Place", place.Id == 1 ? true : false, new { @class = "form-check-input" })
+                                        @*@Html.Hidden("Place_" + place.Id, place.Name)*@
 
-                                        @*@Html.Label(place.Name, "Place", new { @class = "form-check-label" })*@
-                                        @Html.Label("Place","Địa chỉ" , new { @class = "form-check-label" })
+                                        @*@Html.CheckBox("Place", String.IsNullOrEmpty(Model.Place) ? false : place.Name.Contains(Model.Place) ? true : false, new { @class = "form-check-input" })*@
+                                        <input type="checkbox" id="Place" name="Place" value="@place.Name">
+
+                                        @Html.Label("Place", place.Name, new { @class = "form-check-label" })
                                     </div>
                                 }
                             }
-                        </div>
+                        </div>                        
                     </div>
                     <div class="form-group py-2 ">
                         @Html.Label("Status", "Public", htmlAttributes: new { @class = "control-label col-md-2 m-1" })
@@ -74,7 +75,7 @@
                     </div>
                     <div class="form-group py-2 row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.Category_Id, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
+                            @Html.Label("Category_Id", "Loại", htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                             <div class="col-md-12 ">
                                 @Html.DropDownList("Category_Id", new SelectList(ViewBag.listCategory, "Id", "Name"), new { @class = "form-select" })
                             </div>

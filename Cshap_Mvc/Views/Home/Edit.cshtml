@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var listPlace = ViewBag.listPlace;
+    //var listPlace = ViewBag.listPlace;
+    List<Cshap_Mvc.Models.PlaceModel> listPlace = ViewBag.listPlace;
 }
 <div class="content p-3 blog-edit">
     <div class="card">
@@ -51,10 +52,12 @@
                             @{ foreach (var place in listPlace)
                                 {
                                     <div class="form-check col-md-2">
-                                        @Html.CheckBox("Place", place.Id == 1 ? true : false, new { @class = "form-check-input" })
+                                        @*@Html.Hidden("Place_" + place.Id, place.Name)*@
 
-                                        @*@Html.Label(place.Name, "Place", new { @class = "form-check-label" })*@
-                                        @Html.Label("Place", "Địa chỉ", new { @class = "form-check-label" })
+                                        @*@Html.CheckBox("Place", String.IsNullOrEmpty(Model.Place) ? false : place.Name.Contains(Model.Place) ? true : false, new { @class = "form-check-input" })*@
+                                        <input type="checkbox" id="Place" name="Place" value="@place.Name">
+
+                                        @Html.Label("Place", place.Name, new { @class = "form-check-label" })
                                     </div>
                                 }
                             }
@@ -65,12 +68,12 @@
                         @Html.Label("Status", "Public", htmlAttributes: new { @class = "control-label col-md-2 m-1" })
                         <div class="col-md-12 row mx-2">
                             <div class="form-check col-md-1">
-                                @Html.RadioButtonFor(model => model.Status, true, new { @class = "form-check-input" })
-                                @Html.Label("Public_Date", "Yes")
+                                @Html.RadioButtonFor(model => model.Status, "true", new { @class = "form-check-input" })
+                                @Html.Label("Status_yes", "Yes")
                             </div>
                             <div class="form-check col-md-1">
-                                @Html.RadioButtonFor(model => model.Status, false, new { @class = "form-check-input" })
-                                @Html.Label("Public_Date", "No")
+                                @Html.RadioButtonFor(model => model.Status, "false", new { @class = "form-check-input" })
+                                @Html.Label("Status_no", "No")
                             </div>
                         </div>
                         <div class="col-12">

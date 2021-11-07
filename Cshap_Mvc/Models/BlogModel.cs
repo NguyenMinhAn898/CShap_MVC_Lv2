@@ -50,8 +50,15 @@ namespace Cshap_Mvc.Models
         {
             get
             {
-                return Public_Date != null ? Public_Date.Value.ToString("MM/dd/yyyy") : "";
+                return Public_Date != null ? Public_Date.Value.ToString("yyyy/MM/dd") : "";
             }
+        }
+
+        public BlogModel() { }
+
+        public BlogModel(int id)
+        {
+            this.Id = id;
         }
     }    
 

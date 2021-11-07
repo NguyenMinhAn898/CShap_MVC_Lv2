@@ -109,6 +109,9 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -190,28 +193,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Db\blog.cs">
-      <DependentUpon>BlogManagement.tt</DependentUpon>
+      <DependentUpon>BlogManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Db\BlogManagement.Context.cs">
+    <Compile Include="Db\BlogManagementModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BlogManagement.Context.tt</DependentUpon>
+      <DependentUpon>BlogManagementModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Db\BlogManagement.cs">
+    <Compile Include="Db\BlogManagementModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BlogManagement.tt</DependentUpon>
+      <DependentUpon>BlogManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Db\BlogManagement.Designer.cs">
+    <Compile Include="Db\BlogManagementModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BlogManagement.edmx</DependentUpon>
+      <DependentUpon>BlogManagementModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Db\category.cs">
-      <DependentUpon>BlogManagement.tt</DependentUpon>
+      <DependentUpon>BlogManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Db\sysdiagram.cs">
-      <DependentUpon>BlogManagement.tt</DependentUpon>
+      <DependentUpon>BlogManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +222,7 @@
     <Compile Include="Mapper\MappingProfile.cs" />
     <Compile Include="Models\BlogModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\PlaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\BlogService.cs" />
@@ -243,15 +247,15 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Db\BlogManagement.Context.tt">
+    <Content Include="Db\BlogManagementModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BlogManagement.edmx</DependentUpon>
-      <LastGenOutput>BlogManagement.Context.cs</LastGenOutput>
+      <DependentUpon>BlogManagementModel.edmx</DependentUpon>
+      <LastGenOutput>BlogManagementModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Db\BlogManagement.tt">
+    <Content Include="Db\BlogManagementModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BlogManagement.edmx</DependentUpon>
-      <LastGenOutput>BlogManagement.cs</LastGenOutput>
+      <DependentUpon>BlogManagementModel.edmx</DependentUpon>
+      <LastGenOutput>BlogManagementModel.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -291,12 +295,12 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <EntityDeploy Include="Db\BlogManagement.edmx">
+    <EntityDeploy Include="Db\BlogManagementModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BlogManagement.Designer.cs</LastGenOutput>
+      <LastGenOutput>BlogManagementModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Db\BlogManagement.edmx.diagram">
-      <DependentUpon>BlogManagement.edmx</DependentUpon>
+    <Content Include="Db\BlogManagementModel.edmx.diagram">
+      <DependentUpon>BlogManagementModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
@@ -308,6 +312,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

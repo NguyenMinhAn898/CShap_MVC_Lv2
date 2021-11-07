@@ -9,7 +9,6 @@ namespace Cshap_Mvc.Models
 {
     public class BlogModel
     {
-        [Required]
         [Display(Name = "Id")]
         public int Id { get; set; }
 
@@ -25,10 +24,11 @@ namespace Cshap_Mvc.Models
         [Display(Name = "Chi tiết")]
         public String Description { get; set; }
 
-        [Required(ErrorMessage = "Please enter catgory name")]
+        
         [Display(Name = "Loại")]
         public String Category { get; set; }
 
+        [Required(ErrorMessage = "Please enter catgory name")]
         public int Category_Id { get; set; }
 
         [Display(Name = "Hình ảnh")]
@@ -45,6 +45,14 @@ namespace Cshap_Mvc.Models
         public DateTime? Public_Date { get; set; }
 
         public bool Is_Active { get; set; }
+
+        public String Public_Date_Str
+        {
+            get
+            {
+                return Public_Date != null ? Public_Date.Value.ToString("MM/dd/yyyy") : "";
+            }
+        }
     }    
 
     public class BlogDbContext : DbContext

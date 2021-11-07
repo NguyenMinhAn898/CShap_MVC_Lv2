@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace Cshap_Mvc.Controllers
@@ -53,6 +54,9 @@ namespace Cshap_Mvc.Controllers
             if(id == 0)
                 return RedirectToAction("Index");
 
+            ViewBag.listPlace = listPlace();
+            ViewBag.listCategory = categoryService.findAll();
+
             return View(blogService.findById(id));
         }
 
@@ -71,6 +75,9 @@ namespace Cshap_Mvc.Controllers
                 if (blogService.updateBlog(blog))
                     return RedirectToAction("Index");
             }
+            ViewBag.listCategory = categoryService.findAll();
+            ViewBag.listPlace = listPlace();
+
             return View(blog);
         }
 
@@ -83,6 +90,8 @@ namespace Cshap_Mvc.Controllers
             // clear mesage validate in fist load page
             ModelState.Clear();
             ViewBag.listCategory = categoryService.findAll();
+            ViewBag.listPlace = listPlace();
+
             return View();
         }
 
@@ -101,7 +110,41 @@ namespace Cshap_Mvc.Controllers
                 if (blogService.createBlog(blog))
                     return RedirectToAction("Index");
             }
+            ViewBag.listCategory = categoryService.findAll();
+            ViewBag.listPlace = listPlace();
+
             return View();
+        }
+
+        /// <summary>
+        /// Delete row by id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(int Id)
+        {
+            BlogModel blog = new BlogModel();
+            blog.Id = Id;
+
+            return blogService.deleteBlog(blog) ? Json(data: true) : Json(data: false); ;
+        }
+
+        /// <summary>
+        /// Fetch list place
+        /// </summary>
+        /// <returns></returns>
+        public List<PlaceModel> listPlace()
+        {
+            List<PlaceModel> list = new List<PlaceModel>();
+
+            list.Add(new PlaceModel(1, "Việt Nam"));
+            list.Add(new PlaceModel(2, "Châu Á"));
+            list.Add(new PlaceModel(3, "Châu Âu"));
+            list.Add(new PlaceModel(4, "Châu Úc"));
+            list.Add(new PlaceModel(5, "Châu Mỹ"));
+
+            return list;
         }
     }
 }

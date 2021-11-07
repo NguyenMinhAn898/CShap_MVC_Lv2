@@ -10,6 +10,8 @@ namespace Cshap_Mvc.Services
 {
     class BlogService : BaseService
     {
+        // Chưa có log khi lỗi 
+        // Chưa sử lý auto mapper
 
         public BlogService() : base()
         {
@@ -21,22 +23,27 @@ namespace Cshap_Mvc.Services
         /// <returns></returns>
         public  List<BlogModel> findAll()
         {
-            //List<blog> list = cnn.blogs.Where(blog => blog.is_active == true).ToList();
-            //List<CategoryModel> output = _mapper.Map<List<BlogModel>>(list);
-            List<BlogModel> list = cnn.blogs.Where(b => b.is_active == true)
-                .Select(b => new BlogModel
-                {
-                    Id = b.id,
-                    Title = b.title,
-                    Short_Description = b.short_description,
-                    Description = b.description,
-                    // cần sửa vì 2 bảng đã join 
-                    Category = cnn.categories.Where(c => c.id == b.id).FirstOrDefault().name,
-                    Image_Url = b.img_url,
-                    Place = b.place,
-                    Public_Date = b.public_date
-                }).ToList();
-            return list;
+            try
+            {
+                List<BlogModel> list = cnn.blogs.Where(b => b.is_active == true)
+                    .Select(b => new BlogModel
+                    {
+                        Id = b.id,
+                        Title = b.title,
+                        Short_Description = b.short_description,
+                        Description = b.description,
+                        // cần sửa vì 2 bảng đã join 
+                        Category = cnn.categories.Where(c => c.id == b.id).FirstOrDefault().name,
+                        Image_Url = b.img_url,
+                        Place = b.place,
+                        Public_Date = b.public_date
+                    }).ToList();
+                return list;
+            }
+            catch
+            {
+                return new List<BlogModel>();
+            }            
         }
 
         /// <summary>
@@ -81,10 +88,12 @@ namespace Cshap_Mvc.Services
                                    select (new BlogModel
                                    {
                                        Id = blog.id,
+                                       Title = blog.title,
                                        Description = blog.description,
                                        Short_Description = blog.short_description,
                                        Status = blog.status,
-                                       Category_Id = blog.category_id
+                                       Category_Id = blog.category_id,
+                                       Public_Date = blog.public_date
                                    })).FirstOrDefault();
                 return ouput;
             }
@@ -110,6 +119,7 @@ namespace Cshap_Mvc.Services
                 newblog.category_id = 1;
                 newblog.status = newBlogModel.Status;
                 newblog.is_active = true;
+                newblog.public_date = newBlogModel.Public_Date;
 
                 cnn.blogs.Add(newblog);
                 cnn.SaveChanges();
@@ -138,6 +148,11 @@ namespace Cshap_Mvc.Services
                     blogUpdate.title = blog.Title;
                     blogUpdate.short_description = blog.Short_Description;
                     blogUpdate.description = blog.Description;
+                    blogUpdate.status = blog.Status;
+                    blogUpdate.public_date = blog.Public_Date;
+                    blogUpdate.img_url = blog.Image_Url;
+                    blogUpdate.place = blog.Place;
+                    blogUpdate.category_id = blog.Category_Id;
 
                     cnn.SaveChanges();
                     return true;
@@ -175,7 +190,5 @@ namespace Cshap_Mvc.Services
                 return false;
             }
         }
-
-
     }
 }

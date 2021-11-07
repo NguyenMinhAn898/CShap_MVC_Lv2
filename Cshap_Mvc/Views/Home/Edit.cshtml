@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var listPlace = ViewBag.listPlace;
 }
 <div class="content p-3 blog-edit">
     <div class="card">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
         {
             <div class="card-header">
                 <h2>Edit Blogs</h2>
@@ -47,30 +48,28 @@
                     <div class="form-group py-2 ">
                         @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                         <div class="row mx-2">
-                            <div class="form-check col-md-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
-                                </label>
-                            </div>
-                            <div class="form-check col-md-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Checked checkbox
-                                </label>
-                            </div>
+                            @{ foreach (var place in listPlace)
+                                {
+                                    <div class="form-check col-md-2">
+                                        @Html.CheckBox("Place", place.Id == 1 ? true : false, new { @class = "form-check-input" })
+
+                                        @*@Html.Label(place.Name, "Place", new { @class = "form-check-label" })*@
+                                        @Html.Label("Place", "Địa chỉ", new { @class = "form-check-label" })
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
 
                     <div class="form-group py-2 ">
-                        @Html.Label("Status","Public", htmlAttributes: new { @class = "control-label col-md-2 m-1" })
+                        @Html.Label("Status", "Public", htmlAttributes: new { @class = "control-label col-md-2 m-1" })
                         <div class="col-md-12 row mx-2">
                             <div class="form-check col-md-1">
-                                @Html.RadioButtonFor(model => model.Status,true,new { @class = "form-check-input"})
+                                @Html.RadioButtonFor(model => model.Status, true, new { @class = "form-check-input" })
                                 @Html.Label("Public_Date", "Yes")
                             </div>
                             <div class="form-check col-md-1">
-                                @Html.RadioButtonFor(model => model.Status, false,  new { @class = "form-check-input" })
+                                @Html.RadioButtonFor(model => model.Status, false, new { @class = "form-check-input" })
                                 @Html.Label("Public_Date", "No")
                             </div>
                         </div>
@@ -82,18 +81,13 @@
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                             <div class="col-md-12 ">
-                                @*@Html.DropDownList("Category", new SelectList(Model.listCategory, "Id", "Name", Model.Blog.Category_Id), new { @class = "form-control-novalidate with-30" })*@
-                                <select class="form-select" id="StudentGender" name="StudentGender">
-                                    <option>Select Gender</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
+                                @Html.DropDownList("Category_Id", new SelectList(ViewBag.listCategory, "Id", "Name", Model.Category_Id), new { @class = "form-select" })
                             </div>
                         </div>
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Public_Date, htmlAttributes: new { @class = "control-label col-md-2  m-1" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.Public_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                <input class="form-control" name="Public_Date" id="Public_Date" type="date" value="@Model.Public_Date_Str" />
                                 @Html.ValidationMessageFor(model => model.Public_Date, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -101,9 +95,9 @@
                 </div>
 
             </div>
-            <div class="card-footer text-center" >
-                    <button class="btn btn-success c" type="submit">Submit</button>
-                    <button class="btn btn-primary" type="button" > Clear</button>
+            <div class="card-footer text-center">
+                <button class="btn btn-success" type="submit">Submit</button>
+                <button class="btn btn-primary" type="button"> Clear</button>
             </div>
         }
 

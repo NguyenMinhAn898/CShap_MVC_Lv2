@@ -13,7 +13,7 @@
     @Html.Partial("_Hearder")
     <div class="container-fluid body-content ">
         <!--Content-->
-        <div class="row">  
+        <div class="row">
             <!-- Menu -->
             <div class="col-2 col-md-2 col-lg-2 col-sm-2">
                 @Html.Partial("_Menu")
@@ -29,7 +29,11 @@
 
     @Scripts.Render("~/Scripts/bootstrap.js")
     @Scripts.Render("~/bundles/jquery")
+    <!-- CDN sweet alert 2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
     @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/Scripts/main.js")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
